@@ -9,11 +9,11 @@ namespace GuidPlus
     /// </summary>
     public static class Guid6
     {
-        private static DateTime GregorianEpoch { get; } = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
-        private static DateTime LastClock { get; set; }
-        private static RandomNumberGenerator RandomNumberGenerator { get; } = RandomNumberGenerator.Create();
-        private static int Sequence { get; set; }
-        internal static Func<DateTime> GetTime { get; set; } = () => DateTime.UtcNow;
+        private static readonly DateTime _gregorianEpoch = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
+        private static DateTime _lastClock;
+        private static readonly RandomNumberGenerator _randomNumberGenerator = RandomNumberGenerator.Create();
+        private static int _sequence;
+        internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
 
         /// <summary>
         /// Generates a version 6 UUID.
@@ -22,7 +22,7 @@ namespace GuidPlus
         public static Guid NewGuid()
         {
             var node = new byte[6];
-            RandomNumberGenerator.GetBytes(node);
+            _randomNumberGenerator.GetBytes(node);
 
             return NewGuid(node);
         }
@@ -38,15 +38,15 @@ namespace GuidPlus
                 throw new ArgumentException("Node length must be 6 bytes", nameof(node));
             }
 
-            var clock = GetTime();
-            Sequence = clock > LastClock ? 0 : Sequence + 1;
-            LastClock = clock;
+            var clock = _getTime();
+            _sequence = clock > _lastClock ? 0 : _sequence + 1;
+            _lastClock = clock;
 
-            var timestamp = (clock - GregorianEpoch).Ticks;
+            var timestamp = (clock - _gregorianEpoch).Ticks;
             var timeHigh = (int)(timestamp >> 28);
             var timeMid = (short)(timestamp >> 12);
             var timeLow = (short)(timestamp & 0x0fff | 0x6000);
-            var clockSeq = (short)(Sequence & 0x3fff | 0x8000);
+            var clockSeq = (short)(_sequence & 0x3fff | 0x8000);
 
             return new Guid(
                 timeHigh,

@@ -67,7 +67,7 @@ namespace GuidPlus.Test
         {
             // Freeze time
             var time = DateTime.Now;
-            Guid6.GetTime = () => time;
+            Guid6._getTime = () => time;
 
             var guidA = Guid6.NewGuid();
             var guidB = Guid6.NewGuid();
