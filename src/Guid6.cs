@@ -32,7 +32,7 @@ namespace GuidPlus
         /// <summary>
         /// Generates a version 6 UUID with the specified node bytes.
         /// </summary>
-        /// <param name="node">Node bytes to add to the end of the GUID.</param>
+        /// <param name="node">6 node bytes to add to the end of the GUID.</param>
         public static Guid NewGuid(byte[] node)
         {
             if (node.Length != 6)
