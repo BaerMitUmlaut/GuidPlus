@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace GuidPlus
@@ -59,7 +58,14 @@ namespace GuidPlus
                 timeHigh,
                 timeMid,
                 timeLow,
-                BitConverter.GetBytes(clockSeq).Reverse().Concat(node).ToArray()
+                (byte)(clockSeq >> 8),
+                (byte)clockSeq,
+                node[0],
+                node[1],
+                node[2],
+                node[3],
+                node[4],
+                node[5]
             );
         }
     }
