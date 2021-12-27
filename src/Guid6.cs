@@ -11,7 +11,6 @@ namespace GuidPlus
     {
         private static readonly DateTime _gregorianEpoch = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
         private static DateTime _lastClock;
-        private static readonly RandomNumberGenerator _randomNumberGenerator = RandomNumberGenerator.Create();
         private static int _sequence;
         internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
 
@@ -22,7 +21,10 @@ namespace GuidPlus
         public static Guid NewGuid()
         {
             var node = new byte[6];
-            _randomNumberGenerator.GetBytes(node);
+            using (var randomNumberGenerator = RandomNumberGenerator.Create())
+            {
+                randomNumberGenerator.GetBytes(node);
+            }
 
             return NewGuid(node);
         }
