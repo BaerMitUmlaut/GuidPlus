@@ -9,10 +9,11 @@ namespace GuidPlus
     /// </summary>
     public static class Guid6
     {
+        internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
         private static readonly DateTime _gregorianEpoch = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly object _sequenceLock = new object();
         private static DateTime _lastClock;
         private static int _sequence;
-        internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
 
         /// <summary>
         /// Generates a version 6 UUID.
@@ -40,9 +41,13 @@ namespace GuidPlus
                 throw new ArgumentException("Node length must be 6 bytes", nameof(node));
             }
 
-            var clock = _getTime();
-            _sequence = clock > _lastClock ? 0 : _sequence + 1;
-            _lastClock = clock;
+            DateTime clock;
+            lock (_sequenceLock)
+            {
+                clock = _getTime();
+                _sequence = clock > _lastClock ? 0 : _sequence + 1;
+                _lastClock = clock;
+            }
 
             var timestamp = (clock - _gregorianEpoch).Ticks;
             var timeHigh = (int)(timestamp >> 28);
