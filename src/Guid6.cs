@@ -54,7 +54,7 @@ namespace GuidPlus
             var timeHigh = (int)(timestamp >> 28);
             var timeMid = (short)(timestamp >> 12);
             var timeLow = (short)(timestamp & 0x0fff | 0x6000);
-            var clockSeq = (short)(sequence & 0x3fff | 0x8000);
+            var clockSeq = sequence & 0x3fff | 0x8000;
 
             return new Guid(
                 timeHigh,
