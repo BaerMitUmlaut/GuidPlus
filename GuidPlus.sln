@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuidPlus", "src\GuidPlus.csproj", "{CF5461A4-5953-4858-9C70-B005DF0055C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuidPlus", "src\GuidPlus\GuidPlus.csproj", "{CF5461A4-5953-4858-9C70-B005DF0055C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuidPlus.Test", "test\GuidPlus.Test.csproj", "{FD0A8CE7-FB3D-4916-8AF2-2F4CCD72120D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuidPlus.Test", "test\GuidPlus.Test\GuidPlus.Test.csproj", "{FD0A8CE7-FB3D-4916-8AF2-2F4CCD72120D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

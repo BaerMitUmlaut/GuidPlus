@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\GuidPlus.csproj" />
+    <ProjectReference Include="..\..\src\GuidPlus\GuidPlus.csproj" />
   </ItemGroup>
 
 </Project>
