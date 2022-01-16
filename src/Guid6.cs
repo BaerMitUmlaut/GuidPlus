@@ -6,7 +6,7 @@ namespace GuidPlus
     /// <summary>
     /// Generator for version 6 UUIDs (GUIDs).
     /// </summary>
-    public static class Guid6
+    public static partial class Guid6
     {
         internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
         private static readonly DateTime _gregorianEpoch = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
