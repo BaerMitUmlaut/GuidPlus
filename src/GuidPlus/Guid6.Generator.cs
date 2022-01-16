@@ -22,7 +22,7 @@ namespace GuidPlus
             {
                 if (node.Length != 6)
                 {
-                    throw new ArgumentException("Node length must be 6 bytes", nameof(node));
+                    throw new ArgumentException("Node length must be 6 bytes.", nameof(node));
                 }
 
                 _node = node;

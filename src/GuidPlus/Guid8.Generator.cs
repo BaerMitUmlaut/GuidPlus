@@ -45,7 +45,7 @@ namespace GuidPlus
                 if (timeSize > 48 && node.Length != 7)
                 {
                     throw new ArgumentException(
-                        "Node length must be 7 bytes for timestamps using up to 48 bits",
+                        "Node length must be 7 bytes for timestamps using up to 48 bits.",
                         nameof(node)
                     );
                 }
@@ -53,7 +53,7 @@ namespace GuidPlus
                 if (timeSize <= 48 && node.Length != 8)
                 {
                     throw new ArgumentException(
-                        "Node length must be 8 bytes for timestamps larger than 48 bits",
+                        "Node length must be 8 bytes for timestamps larger than 48 bits.",
                         nameof(node)
                     );
                 }
@@ -77,7 +77,7 @@ namespace GuidPlus
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(timeSize),
-                        "Timestamps larger than 60 bits are not supported"
+                        "Timestamps larger than 60 bits are not supported."
                     );
                 }
 
@@ -85,7 +85,7 @@ namespace GuidPlus
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(timeSize),
-                        "Timestamps cannot be smaller than 1 bit"
+                        "Timestamps cannot be smaller than 1 bit."
                     );
                 }
 
