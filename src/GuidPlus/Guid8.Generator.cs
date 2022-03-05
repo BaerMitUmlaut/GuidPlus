@@ -65,11 +65,6 @@ namespace GuidPlus
             /// </summary>
             /// <param name="timeSource">Timestamp provider function.</param>
             /// <param name="timeSize">Size of provided timestamp in bit (up to 60).</param>
-            /// <param name="node">
-            /// Node bytes to add to the end of the GUID. Timestamps using up to 48 bits require 7
-            /// node bytes, larger timestamps require 8 node bytes. The first two bits of the first
-            /// byte will by overwritten.
-            /// </param>
             /// <param name="nodeGenerator">Node provider function.</param>
             private Generator(Func<ulong> timeSource, int timeSize, Func<byte[]> nodeGenerator)
             {
