@@ -1,0 +1,22 @@
+name: NuGet
+on:
+  release:
+    types: [published]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Package project
+        run: dotnet pack --configuration Release --no-restore -o .
+      - name: Push to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "GuidPlus.${GITHUB_REF}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
+
