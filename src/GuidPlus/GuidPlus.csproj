@@ -2,6 +2,39 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- NuGet Package Properties -->
+    <PackageId>GuidPlus</PackageId>
+    <Authors>BaerMitUmlaut</Authors>
+    <Company>GuidPlus</Company>
+    <Copyright>Copyright © BaerMitUmlaut 2022</Copyright>
+    <Description>
+      GUID+ is a drop-in replacement for .NET's default UUID generation, enabling generation of version 6, 7 and 8 UUIDs.
+    </Description>
+    <PackageIcon>package-icon.png</PackageIcon>
+    <PackageTags>uuid guid</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/BaerMitUmlaut/GuidPlus</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BaerMitUmlaut/GuidPlus.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\package-icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="3.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +42,5 @@
       <_Parameter1>GuidPlus.Test</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
-
 
 </Project>

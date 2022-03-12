@@ -14,5 +14,5 @@ trim_trailing_whitespace = false
 [*.sln]
 end_of_line = crlf
 
-[*.yml]
+[*.{yml,csproj}]
 indent_size = 2
