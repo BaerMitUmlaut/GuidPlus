@@ -4,8 +4,9 @@
 </p>
 
 <p align="center">
-  <img alt="Build status" src="https://img.shields.io/github/workflow/status/BaerMitUmlaut/GuidPlus/xUnit?style=flat-square" />
-  <img alt="MIT License" src="https://img.shields.io/github/license/BaerMitUmlaut/GuidPlus?style=flat-square" />
+  <a href="https://www.nuget.org/packages/GuidPlus/"><img alt="Build status" src="https://img.shields.io/nuget/v/GuidPlus?style=flat-square" /></a>
+  <a href="https://github.com/BaerMitUmlaut/GuidPlus/actions/workflows/xunit.yml"><img alt="Build status" src="https://img.shields.io/github/workflow/status/BaerMitUmlaut/GuidPlus/xUnit?style=flat-square" /></a>
+  <a href="https://github.com/BaerMitUmlaut/GuidPlus/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/BaerMitUmlaut/GuidPlus?style=flat-square" /></a>
 </p>
                                                                                                              
 <p align="center">
