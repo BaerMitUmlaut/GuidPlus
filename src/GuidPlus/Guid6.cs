@@ -11,8 +11,8 @@ namespace GuidPlus
         internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
         private static readonly DateTime _gregorianEpoch = new DateTime(1582, 10, 15, 0, 0, 0, DateTimeKind.Utc);
         private static readonly object _sequenceLock = new object();
-        private static DateTime _lastClock;
-        private static int _sequence;
+        private static DateTime _lastClock = DateTime.UtcNow;
+        private static int _sequence = new Random().Next();
 
         /// <summary>
         /// Generates a version 6 UUID.
