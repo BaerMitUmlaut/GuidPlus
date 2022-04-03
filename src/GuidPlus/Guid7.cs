@@ -8,10 +8,9 @@ namespace GuidPlus
     /// </summary>
     public static partial class Guid7
     {
-        internal static Func<DateTime> _getTime = () => DateTime.UtcNow;
-        private static readonly DateTime _unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        internal static Func<ulong> _getTimestamp = () => (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         private static readonly object _sequenceLock = new object();
-        private static DateTime _lastClock;
+        private static ulong _lastTimestamp;
         private static int _sequence;
 
         /// <summary>
@@ -43,31 +42,26 @@ namespace GuidPlus
                 throw new ArgumentException("Node length must be 8 bytes.", nameof(node));
             }
 
-            DateTime clock;
+            ulong unixTsMs;
             int sequence;
             lock (_sequenceLock)
             {
-                clock = _getTime();
-                // Round to milliseconds
-                clock = clock.AddTicks(-clock.Ticks % TimeSpan.TicksPerMillisecond);
-                _sequence = clock > _lastClock ? 0 : _sequence + 1;
+                unixTsMs = _getTimestamp();
+                _sequence = unixTsMs > _lastTimestamp ? 0 : _sequence + 1;
                 sequence = _sequence;
-                _lastClock = clock;
+                _lastTimestamp = unixTsMs;
             }
 
-            var unixDiff = clock - _unixEpoch;
-            var unixTs = (ulong)unixDiff.TotalSeconds;
-            var msec = (uint)unixDiff.Milliseconds;
             var clockSeq = sequence & 0x3fff | 0x7000;
 
             return new Guid(new[]
             {
-                (byte)(unixTs >> 4),
-                (byte)(unixTs >> 12),
-                (byte)(unixTs >> 20),
-                (byte)(unixTs >> 28),
-                (byte)(msec),
-                (byte)((unixTs << 4) | (msec >> 8)),
+                (byte)(unixTsMs >> 16),
+                (byte)(unixTsMs >> 24),
+                (byte)(unixTsMs >> 32),
+                (byte)(unixTsMs >> 40),
+                (byte)(unixTsMs),
+                (byte)(unixTsMs >> 8),
                 (byte)(clockSeq),
                 (byte)(clockSeq >> 8),
                 (byte)(node[0] & 0x3f | 0x80),

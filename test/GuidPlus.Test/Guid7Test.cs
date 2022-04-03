@@ -54,14 +54,14 @@ namespace GuidPlus.Test
         [Fact]
         public void TimestampIsSet()
         {
-            var time = new DateTime(2020, 1, 1, 12, 0, 0, DateTimeKind.Utc);
-            Guid7._getTime = () => time;
+            var time = new DateTimeOffset(2020, 1, 1, 12, 0, 0, 0, TimeSpan.Zero);
+            Guid7._getTimestamp = () => (ulong)time.ToUnixTimeMilliseconds();
 
             var guid = Guid7.NewGuid();
 
-            var timestamp = long.Parse(guid.ToString("N")[0..9], NumberStyles.HexNumber);
-            var offset = DateTimeOffset.FromUnixTimeSeconds(timestamp);
-            Assert.Equal(time, offset.DateTime);
+            var timestamp = long.Parse(guid.ToString("N")[0..12], NumberStyles.HexNumber);
+            var parsedTime = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
+            Assert.Equal(time, parsedTime);
         }
 
         [Fact]
@@ -80,8 +80,8 @@ namespace GuidPlus.Test
         public void SequenceNumberIncreases()
         {
             // Freeze time
-            var time = DateTime.Now;
-            Guid7._getTime = () => time;
+            var time = DateTimeOffset.Now;
+            Guid7._getTimestamp = () => (ulong)time.ToUnixTimeMilliseconds();
 
             var guidA = Guid7.NewGuid();
             var guidB = Guid7.NewGuid();
